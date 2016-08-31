@@ -14,7 +14,9 @@ set(USE_SYSTEM_EIGEN "OFF" CACHE INTERNAL "Use a system installation of Eigen")
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/use-system-installation-of-eigen.cmake)
 
+
 if(USE_SYSTEM_EIGEN)
+  message(STATUS "eigen_catkin is configured to USE system eigen")
   if(EXISTS ${EIGEN_CATKIN_EIGEN_INCLUDE_SIGNATURE})
     file(RENAME ${EIGEN_CATKIN_EIGEN_INCLUDE_SIGNATURE} ${EIGEN_CATKIN_EIGEN_INCLUDE_SIGNATURE}.off)
 
@@ -50,6 +52,7 @@ if(USE_SYSTEM_EIGEN)
     message(FATAL_ERROR "Could not find a system Eigen installation! What about turning on eigen_catkin's own Eigen installation by removing USE_SYSTEM_EIGEN.cmake or switching back to the master branch.")
   endif()
 else()
+  message(STATUS "eigen_catkin is configured NOT to use system eigen")
   file(MAKE_DIRECTORY ${EIGEN_CATKIN_EIGEN_INCLUDE})
   ExternalProject_Add(eigen_src
     UPDATE_COMMAND ""
